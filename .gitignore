@@ -1,0 +1,23 @@
+# env / secrets
+.env
+.env.*
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# mac
+.DS_Store
+
+# react build artifacts
+frontend/node_modules/
+frontend/build/
+legal-buddy-ui/node_modules/
+legal-buddy-ui/build/
+
+# misc
+*.log
+.env
+archive/
