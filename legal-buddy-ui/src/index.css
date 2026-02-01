@@ -1,0 +1,1595 @@
+:root{
+  --navy: #112d7b;
+  --bg: #c9d9ee;
+  --bot: #c3d4ea;
+  --user: #aebfda;
+  --input: #dbe9f7;
+  --muted: rgba(17,45,123,.68);
+}
+
+*{ box-sizing:border-box; }
+
+html, body { height: 100%; }
+
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:#fff;
+  color: var(--navy);
+}
+
+/* Center the phone */
+.page{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
+
+.phoneFrame{
+  width: 390px;
+  height: 820px;
+  background: var(--bg);
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 18px 60px rgba(0,0,0,.18);
+}
+
+/* Header */
+.stageHeader{
+  padding: 34px 26px 6px 26px;
+}
+.stageTitle{
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--navy);
+}
+
+.activeCaseRow{
+  margin-bottom: 8px;
+}
+
+.activeCasePill{
+  font-size: 13px;
+  color: var(--muted);
+  padding-left: 8px; /* tiny breathing room */
+}
+
+/* Scroll area */
+.content{
+  position:absolute;
+  inset:0;
+}
+
+.thread{
+  position:absolute;
+  left:0;
+  right:0;
+  top: 120px;
+  bottom: 150px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding: 0 22px 18px 22px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+/* Bubbles */
+.bubble{
+  max-width: 86%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.botBubble{
+  margin-right:auto;
+  background: var(--bot);
+  color: var(--navy);
+  border-bottom-left-radius: 12px;
+}
+
+.userBubble{
+  margin-left:auto;
+  background: var(--user);
+  color: var(--navy);
+  border-bottom-right-radius: 12px;
+  position: relative;
+}
+
+/* user bubble tail */
+.userBubble::after{
+  content:"";
+  position:absolute;
+  right:-12px;
+  top: 16px;
+  width:0; height:0;
+  border-left: 14px solid var(--user);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.subtle{ opacity: .85; }
+
+/* Dock */
+.dock{
+  position:absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(201,217,238,.92);
+  border: 1px solid rgba(17,45,123,.10);
+  backdrop-filter: blur(6px);
+}
+
+/* Make this work even if you forgot classNames on the input/button */
+.dockRow{
+  display:grid;
+  grid-template-columns: 1fr 52px;
+  gap: 12px;
+  align-items:center;
+}
+.dockRow + .dockRow{ margin-top: 10px; }
+
+.dock input,
+.dock .dockInput{
+  height: 52px;
+  width: 100%;
+  border-radius: 20px; /* softer, ChatGPT-like */
+  border: 0;
+  outline: none;
+  padding: 0 18px;
+  background: #e6f0fb; /* slightly softer than var(--input) */
+  color: var(--navy);
+  font-size: 15px;
+}
+
+.dock input:focus,
+.dock .dockInput:focus{
+  box-shadow: 0 0 0 2px rgba(17,45,123,.12);
+}
+
+.dock input::placeholder,
+.dock .dockInput::placeholder{
+  color: rgba(17,45,123,.45);
+}
+
+.page.dark .dock input,
+.page.dark .dock .dockInput{
+  background: var(--input);      /* overrides the hardcoded #e6f0fb */
+  color: var(--navy);
+}
+
+.page.dark .dock input::placeholder,
+.page.dark .dock .dockInput::placeholder{
+  color: rgba(230,236,255,.6);
+}
+
+.page.dark .sendBtn{
+  color: var(--navy);            /* makes the arrow light */
+}
+
+.dock button,
+.dock .sendBtn{
+  width: 52px;
+  height: 52px;
+  border-radius: 50%; /* perfect circle */
+  border: none;
+  cursor: pointer;
+  background: var(--navy);
+  color: #eaf2ff;
+  display: grid;
+  place-items: center;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.sendIcon{
+  stroke: #e6ecff;
+}
+
+.dock button:hover:not(:disabled),
+.dock .sendBtn:hover:not(:disabled){
+  background: #0d2566;
+  transform: translateY(-1px);
+}
+
+.dock button:active:not(:disabled),
+.dock .sendBtn:active:not(:disabled){
+  transform: translateY(0);
+}
+
+.dock button:disabled,
+.dock .sendBtn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.sendIcon{
+  color: #eaf2ff;
+}
+
+.errorInline{
+  font-size:12px;
+  color: rgba(180,0,0,.85);
+  margin-bottom:10px;
+}
+
+/* Optional scrollbar polish */
+.thread::-webkit-scrollbar{ width: 10px; }
+.thread::-webkit-scrollbar-thumb{
+  background: rgba(17,45,123,.10);
+  border-radius: 999px;
+}
+.thread::-webkit-scrollbar-track{ background: transparent; }
+
+/* Night mode */
+/* -------------------- */
+/* 🌙 Night Mode Theme */
+/* -------------------- */
+
+.page.dark{
+  --bg: #071f5a;
+  --bot: #0b2a6f;
+  --user: #0f3a8a;
+  --input: #0b2f73;
+
+  --navy: #e6ecff;              /* main text becomes light */
+  --muted: rgba(230,236,255,.65);
+}
+
+.page.dark ::selection{
+  background: rgba(120,150,255,.35);
+  color: #e6ecff;
+}
+
+.page.dark input::selection{
+  background: rgba(120,150,255,.35);
+  color: #e6ecff;
+}
+
+.page.dark .sendBtn svg{
+  stroke: #e6ecff;
+}
+
+.page.dark .bubble{
+  color: rgba(230,236,255,.92);
+}
+
+.page.dark .dock{
+  background: rgba(11,42,111,.9);
+  border-color: rgba(230,236,255,.08);
+}
+
+.page.dark .dockInput::placeholder{
+  color: rgba(230,236,255,.55);
+}
+
+/* Night mode input matches send button surface */
+.page.dark .dockInput{
+  background: rgba(255,255,255,0.11);
+  color: rgba(230,236,255,0.95);
+  border: 1px solid rgba(230,236,255,0.12);
+}
+
+.page.dark .dockInput::placeholder{
+  color: rgba(230,236,255,0.55);
+}
+
+.page.dark .dockInput:focus{
+  box-shadow: 0 0 0 2px rgba(120,150,255,0.25);
+}
+
+/* Slightly lighter than the night background, with a subtle border */
+.page.dark .sendBtn{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(230,236,255,0.12);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+/* Keep the arrow visible */
+.page.dark .sendIcon{
+  stroke: rgba(230,236,255,0.92);
+}
+
+/* hover slightly brighter */
+.page.dark .sendBtn:hover:not(:disabled){
+  background: rgba(255,255,255,0.11);
+}
+
+.themeToggle{
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  z-index: 10;
+
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.themeToggle:hover{
+  text-decoration: underline;
+}
+
+/* ---------- Theme toggle switch ---------- */
+
+.themeToggle{
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.themeIcon{
+  font-size: 14px;
+  line-height: 1;
+}
+
+.toggleTrack{
+  width: 36px;
+  height: 20px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 999px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.toggleTrack.on{
+  background: rgba(255,255,255,0.35);
+}
+
+.toggleThumb{
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s ease;
+}
+
+.toggleTrack.on .toggleThumb{
+  transform: translateX(16px);
+}
+
+/* Theme toggle icon colors */
+.themeIcon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page:not(.dark) .themeIcon{
+  color: rgba(17,45,123,0.75);
+}
+
+.page.dark .themeIcon{
+  color: rgba(230,236,255,0.85);
+}
+
+/* Landing center text */
+.landingCenter{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.landingText{
+  font-size: 44px;
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: rgba(17,45,123,.40);
+  transform: translateY(-14px);
+}
+
+.page.dark .landingText{
+  color: rgba(230,236,255,.30);
+}
+
+/* --- Timeline (SVG) --- */
+
+.timelineCardSvg {
+  margin-top: 12px;
+}
+
+/* Make the whole card feel larger */
+.timelineHeader .timelineTitle {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+.timelineHeader .timelineStage {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* Scale up the timeline */
+.timelineSvgWrap {
+  margin-top: 10px;
+}
+
+.timelineSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Stronger spine + connector contrast */
+.tlSpine,
+.tlConnector {
+  stroke: currentColor;
+  stroke-width: 3;
+  opacity: 0.28;
+}
+
+/* Bigger nodes */
+.tlNode {
+  fill: currentColor;
+  opacity: 0.95;
+}
+
+.tlRow.ghost .tlNode {
+  opacity: 0.30;
+}
+
+/* Now ring more visible */
+.tlNowRing {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  opacity: 0.7;
+}
+
+/* Label bubble: higher contrast */
+.tlLabel {
+  font-family: inherit;
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+}
+
+/* Dark mode label bubble: not see-through */
+.page.dark .tlLabel {
+  background: rgba(16, 20, 35, 0.96);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.40);
+}
+
+.tlRow.ghost .tlLabel {
+  opacity: 0.78;
+}
+
+/* Force readable text inside the label bubble (foreignObject needs this) */
+.tlLabel,
+.tlLabel * {
+  color: rgba(17,45,123,0.92);
+}
+
+.page.dark .tlLabel,
+.page.dark .tlLabel * {
+  color: rgba(230,236,255,0.95);
+}
+
+/* Bigger text */
+.tlLabelTitle {
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.tlLabelDate {
+  font-size: 13px;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.tlLabelSub {
+  margin-top: 4px;
+  font-size: 13px;
+  opacity: 0.78;
+  line-height: 1.25;
+}
+
+/* Optional: give the warning text more readability */
+.timelineWarning {
+  font-size: 13px;
+  opacity: 0.80;
+}
+
+/* Dark mode: make spine/dots a bit more visible */
+.page.dark .tlSpine,
+.page.dark .tlConnector {
+  opacity: 0.40;
+}
+
+.page.dark .tlNode {
+  opacity: 0.98;
+}
+
+/* --- Timeline draw animations --- */
+.tlDrawSpine {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: tlSpineDraw 900ms ease forwards;
+}
+
+@keyframes tlSpineDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+.tlRow .tlNode {
+  transform-origin: center;
+  transform: scale(0.5);
+  opacity: 0;
+  animation: tlNodePop 420ms cubic-bezier(.2,.9,.2,1) forwards;
+  animation-delay: calc(var(--i) * 90ms + 180ms);
+}
+
+@keyframes tlNodePop {
+  to { transform: scale(1); opacity: 0.95; }
+}
+
+.tlRow.ghost .tlNode {
+  animation-delay: calc(var(--i) * 90ms + 220ms);
+  opacity: 0.3;
+}
+
+.tlRow .tlConnector {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: tlConnDraw 420ms ease forwards;
+  animation-delay: calc(var(--i) * 90ms + 220ms);
+}
+
+@keyframes tlConnDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Slide labels in */
+.tlRow .tlLabel {
+  transform: translateX(-10px);
+  opacity: 0;
+  animation: tlLabelIn 520ms ease forwards;
+  animation-delay: calc(var(--i) * 90ms + 260ms);
+}
+
+@keyframes tlLabelIn {
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Now ring: pulse once (no infinite bobbing) */
+/* Active "you are here" ring — continuous gentle pulse */
+.tlRow.now .tlNowRing {
+  animation: tlPulse 1000ms ease-in-out infinite;
+  transform-origin: center;
+}
+g {
+  animation: tlPulse 900ms ease-in-out 1;
+}
+
+@keyframes tlPulse {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+}
+
+
+/* =========================
+   TIMELINE TEXT FIX (wins)
+   ========================= */
+
+/* Force the "Timeline" + stage subtitle to be readable */
+.timelineCardSvg .timelineHeader .timelineTitle,
+.timelineCardSvg .timelineHeader .timelineStage{
+  color: var(--navy) !important;
+  opacity: 1 !important;
+}
+
+/* Force the warning line to be readable */
+.timelineCardSvg .timelineWarnings,
+.timelineCardSvg .timelineWarning{
+  color: var(--navy) !important;
+  opacity: 0.9 !important;
+}
+
+/* Dark mode: same, but using your light text var */
+.page.dark .timelineCardSvg .timelineHeader .timelineTitle,
+.page.dark .timelineCardSvg .timelineHeader .timelineStage{
+  color: var(--navy) !important; /* in dark mode your --navy is already light */
+  opacity: 1 !important;
+}
+
+.page.dark .timelineCardSvg .timelineWarnings,
+.page.dark .timelineCardSvg .timelineWarning{
+  color: rgba(230,236,255,0.85) !important;
+  opacity: 1 !important;
+}
+
+/* =========================
+   TIMELINE NODE VISIBILITY
+   ========================= */
+
+/* Base node color (light mode) */
+.timelineCardSvg .tlNode {
+  fill: #112d7b;              /* solid navy */
+  opacity: 1 !important;
+}
+
+/* Connector dots that are "ghosted" */
+.timelineCardSvg .tlRow.ghost .tlNode {
+  opacity: 0.35 !important;
+}
+
+/* Vertical spine + connectors */
+.timelineCardSvg .tlSpine,
+.timelineCardSvg .tlConnector {
+  stroke: #112d7b;
+  opacity: 0.35;
+}
+
+/* NOW ring — make it POP */
+.timelineCardSvg .tlNowRing {
+  stroke: #112d7b;
+  opacity: 0.9;
+}
+
+/* -------------------------
+   Dark mode overrides
+   ------------------------- */
+
+.page.dark .timelineCardSvg .tlNode {
+  fill: #e6ecff;              /* light icy blue */
+  opacity: 1 !important;
+}
+
+.page.dark .timelineCardSvg .tlRow.ghost .tlNode {
+  opacity: 0.45 !important;
+}
+
+.page.dark .timelineCardSvg .tlSpine,
+.page.dark .timelineCardSvg .tlConnector {
+  stroke: rgba(230,236,255,0.55);
+}
+
+.page.dark .timelineCardSvg .tlNowRing {
+  stroke: #ffffff;
+  opacity: 0.95;
+}
+
+/* =========================
+   TIMELINE CARD LOOK + READABILITY
+   ========================= */
+
+/* Make the timeline block feel like a "card" inside the chat */
+.timelineCardSvg{
+  margin-top: 12px;
+}
+
+/* Header readability */
+.timelineCardSvg .timelineTitle{
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  color: var(--navy);
+  opacity: 1;
+}
+
+.timelineCardSvg .timelineStage{
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  opacity: 0.85;
+}
+
+/* SVG wrapper */
+.timelineSvgWrap{
+  margin-top: 10px;
+  border-radius: 16px;
+}
+
+/* Spine + connectors */
+.timelineCardSvg .tlSpine,
+.timelineCardSvg .tlConnector{
+  stroke: currentColor;
+  stroke-width: 3;
+  opacity: 0.30;
+}
+
+/* Nodes */
+.timelineCardSvg .tlNode{
+  fill: currentColor;
+  opacity: 0.95;
+}
+
+.timelineCardSvg .tlRow.ghost .tlNode{
+  opacity: 0.35;
+}
+
+/* ==================================================
+   EVENT CARD BACKGROUNDS (theme-relative, not white/black)
+   ================================================== */
+
+/* Light mode: slightly lighter than background */
+.timelineCardSvg .tlLabel{
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.38);   /* lighter than --bg but not white */
+  border: 1px solid rgba(17,45,123,0.10);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+  backdrop-filter: blur(6px);
+}
+
+/* Dark mode: slightly darker than background (NOT black) */
+.page.dark .timelineCardSvg .tlLabel{
+  background: rgba(0,0,0,0.18);         /* slightly darker than dark --bg */
+  border: 1px solid rgba(230,236,255,0.14);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+
+/* Force label text readable */
+.timelineCardSvg .tlLabel,
+.timelineCardSvg .tlLabel *{
+  color: rgba(17,45,123,0.96);
+}
+.page.dark .timelineCardSvg .tlLabel,
+.page.dark .timelineCardSvg .tlLabel *{
+  color: rgba(230,236,255,0.95);
+}
+
+/* Title/date row layout (left/right) + bigger fonts */
+.timelineCardSvg .tlLabelTop{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.timelineCardSvg .tlLabelTitle{
+  font-weight: 650;
+  font-size: 15px;     /* bigger */
+  line-height: 1.15;
+}
+
+.timelineCardSvg .tlLabelDate{
+  font-size: 14px;     /* bigger */
+  font-weight: 600;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.timelineCardSvg .tlLabelSub{
+  margin-top: 5px;
+  font-size: 13px;     /* bigger */
+  opacity: 0.85;
+  line-height: 1.25;
+}
+
+/* Warnings */
+.timelineCardSvg .timelineWarning{
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.85;
+  color: var(--navy);
+}
+.page.dark .timelineCardSvg .timelineWarning{
+  color: rgba(230,236,255,0.80);
+  opacity: 1;
+}
+
+/* =========================
+   "NOW" RING PULSE (NO MOVEMENT)
+   ========================= */
+
+/* Make ring visible */
+.timelineCardSvg .tlNowRing{
+  fill: none;
+  stroke: currentColor;
+  opacity: 0.85;
+}
+
+/* Pulse using stroke-width + opacity only (center never moves) */
+.timelineCardSvg .tlRow.now .tlNowRing{
+  animation: tlRingBreathe 1600ms ease-in-out infinite;
+}
+
+.timelineCardSvg .tlNowRing{
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  opacity: 0.85;
+}
+
+
+@keyframes tlRingBreathe{
+  0%   { stroke-width: 2; opacity: 0.55; }
+  50%  { stroke-width: 3; opacity: 0.9; }
+  100% { stroke-width: 2; opacity: 0.55; }
+}
+
+/* Optional: ghost rows slightly muted */
+.timelineCardSvg .tlRow.ghost .tlLabel{
+  opacity: 0.82;
+}
+
+/* Keep your draw-in animation if you want it */
+.timelineCardSvg .tlDrawSpine{
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: tlSpineDraw 900ms ease forwards;
+}
+@keyframes tlSpineDraw{ to{ stroke-dashoffset: 0; } }
+
+/* --- Timeline context box (not a timeline node) --- */
+.timelineContextBox{
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  /* light mode: slightly lighter than screen bg */
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(17,45,123,0.10);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+}
+
+.page.dark .timelineContextBox{
+  /* dark mode: slightly darker than screen bg */
+  background: rgba(0,0,0,0.16);
+  border: 1px solid rgba(230,236,255,0.12);
+  box-shadow: 0 14px 26px rgba(0,0,0,0.35);
+}
+
+.timelineContextTitle{
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.timelineContextSub{
+  margin-top: 4px;
+  font-size: 13px;
+  opacity: 0.82;
+  line-height: 1.25;
+}
+
+
+/* --- Timeline context box: FORCE readable text colors --- */
+.timelineContextBox,
+.timelineContextBox * {
+  color: rgba(17,45,123,0.92);
+}
+
+.page.dark .timelineContextBox,
+.page.dark .timelineContextBox * {
+  color: rgba(230,236,255,0.95);
+}
+
+/* Improve dark-mode box surface so it's clearly separated */
+.page.dark .timelineContextBox{
+  background: rgba(255,255,255,0.09);     /* slightly lighter than bg */
+  border: 1px solid rgba(230,236,255,0.16);
+}
+
+.timelineContextList{
+  margin: 10px 0 0 18px;
+  padding: 0;
+}
+
+.timelineContextItem{
+  margin: 6px 0;
+  font-size: 13px;
+  line-height: 1.25;
+  opacity: 0.92;
+}
+
+/* ----------------------------- */
+/* Procedural Simulator (Card)   */
+/* ----------------------------- */
+
+.simCard{
+  margin-top: 12px;
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255,255,255,0.35);                 /* light mode: slightly lighter than bg */
+  border: 1px solid rgba(17,45,123,0.10);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.08);
+}
+
+.page.dark .simCard{
+  background: rgba(255,255,255,0.08);                  /* dark mode: slightly lighter than bg */
+  border-color: rgba(230,236,255,0.10);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+}
+
+.simHeader{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.simTitle{
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+.simStage{
+  font-size: 12px;
+  opacity: 0.75;
+  color: var(--navy);
+}
+
+.simNode{
+  border-radius: 14px;
+  padding: 12px 12px;
+  background: rgba(255,255,255,0.55);                  /* light mode node panel */
+  border: 1px solid rgba(17,45,123,0.10);
+}
+
+.page.dark .simNode{
+  background: rgba(0,0,0,0.18);                         /* dark mode: slightly darker than simCard */
+  border-color: rgba(230,236,255,0.10);
+}
+
+.simNodeTitle{
+  font-size: 15px;
+  font-weight: 750;
+  margin-bottom: 6px;
+  color: var(--navy);
+}
+
+.simNodeBody{
+  font-size: 13px;
+  line-height: 1.35;
+  opacity: 0.88;
+  color: var(--navy);
+}
+
+.simChoices{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.simChoiceBtn{
+  width: 100%;
+  border: 1px solid rgba(17,45,123,0.12);
+  background: rgba(255,255,255,0.70);
+  color: var(--navy);
+  border-radius: 14px;
+  padding: 12px 12px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+
+.simChoiceBtn:hover:not(:disabled){
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(17,45,123,0.18);
+}
+
+.simChoiceBtn:active:not(:disabled){
+  transform: translateY(0);
+}
+
+.page.dark .simChoiceBtn{
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(230,236,255,0.14);
+  color: rgba(230,236,255,0.95);
+}
+
+.page.dark .simChoiceBtn:hover:not(:disabled){
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(230,236,255,0.20);
+}
+
+.simChoiceBtn.secondary{
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+.simChoiceBtn:disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.simFooter{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 10px;
+}
+
+.simNavBtn{
+  border: 1px solid rgba(17,45,123,0.14);
+  background: rgba(255,255,255,0.65);
+  color: var(--navy);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.12s ease;
+}
+
+.simNavBtn:hover:not(:disabled){
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.82);
+}
+
+.page.dark .simNavBtn{
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(230,236,255,0.14);
+  color: rgba(230,236,255,0.95);
+}
+
+.page.dark .simNavBtn:hover:not(:disabled){
+  background: rgba(255,255,255,0.14);
+}
+
+.simNavBtn:disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.simCrumb{
+  font-size: 12px;
+  opacity: 0.75;
+  color: var(--navy);
+}
+
+.page.dark .simCrumb{
+  color: rgba(230,236,255,0.80);
+}
+
+/* =====================
+   SECRET PINK MODE
+   ===================== */
+/* ===== Pink Mode Tokens ===== */
+/* =====================
+   SECRET PINK MODE
+   ===================== */
+
+   .page.pink {
+    background: #ffd6ea;
+  }
+  
+  .page.pink .phoneFrame {
+    background: rgba(255, 245, 252, 0.95);
+    border-color: rgba(255, 105, 180, 0.35);
+  }
+  
+  /* chat bubbles */
+  .page.pink .botBubble {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 105, 180, 0.25);
+    color: #2a0f1f;
+  }
+  
+  .page.pink .userBubble {
+    background: rgba(255, 105, 180, 0.25);
+    border-color: rgba(255, 105, 180, 0.35);
+    color: #2a0f1f;
+  }
+  
+  /* cards */
+  .page.pink .simCard,
+  .page.pink .timelineCardSvg {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(255, 105, 180, 0.3);
+  }
+  
+  /* inputs */
+  .page.pink .dockInput {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 105, 180, 0.35);
+  }
+  
+  .page.pink .sendBtn {
+    background: rgba(255, 105, 180, 0.3);
+    border-color: rgba(255, 105, 180, 0.4);
+  }
+
+  /* =====================
+   PINK MODE – TIMELINE DETAILS
+   ===================== */
+
+/* timeline header text */
+.page.pink .timelineTitle,
+.page.pink .timelineStage {
+  color: rgba(255, 105, 180, 0.95);
+}
+
+/* timeline spine + connectors */
+.page.pink .tlSpine,
+.page.pink .tlConnector {
+  stroke: rgba(255, 105, 180, 0.65);
+}
+
+/* timeline dots */
+.page.pink .tlNode {
+  fill: rgba(255, 105, 180, 0.9);
+}
+
+/* current-stage ring */
+.page.pink .tlNowRing {
+  stroke: rgba(255, 105, 180, 0.95);
+}
+
+/* timeline label cards */
+.page.pink .tlLabel {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 105, 180, 0.25);
+}
+
+.page.pink .tlLabelTitle {
+  color: #2a0f1f;
+}
+
+.page.pink .tlLabelDate {
+  color: rgba(255, 105, 180, 0.9);
+}
+
+.page.pink .tlLabelSub {
+  color: rgba(42, 15, 31, 0.75);
+}
+
+/* context box under timeline */
+.page.pink .timelineContextTitle {
+  color: rgba(255, 105, 180, 0.95);
+}
+
+.page.pink .timelineContextSub,
+.page.pink .timelineContextItem {
+  color: rgba(42, 15, 31, 0.75);
+}
+
+/* =====================
+   PINK MODE – SIMULATOR
+   ===================== */
+
+   .page.pink .simTitle,
+   .page.pink .simStage,
+   .page.pink .simNodeTitle {
+     color: rgba(255, 105, 180, 0.95);
+   }
+   
+   .page.pink .simNodeBody {
+     color: rgba(42, 15, 31, 0.75);
+   }
+   
+   /* simulator buttons */
+   .page.pink .simChoiceBtn {
+     background: rgba(255, 255, 255, 0.92);
+     border-color: rgba(255, 105, 180, 0.35);
+     color: #2a0f1f;
+   }
+   
+   .page.pink .simChoiceBtn:hover {
+     background: rgba(255, 105, 180, 0.18);
+     border-color: rgba(255, 105, 180, 0.6);
+   }
+   
+   .page.pink .simChoiceBtn.secondary {
+     background: transparent;
+     color: rgba(255, 105, 180, 0.95);
+   }
+   
+   /* footer */
+   .page.pink .simNavBtn {
+     border-color: rgba(255, 105, 180, 0.45);
+     color: rgba(255, 105, 180, 0.95);
+   }
+   
+   .page.pink .simCrumb {
+     color: rgba(42, 15, 31, 0.6);
+   }
+
+   /* =====================
+   PINK MODE – DOCK
+   ===================== */
+
+.page.pink .dock {
+  background: rgba(255, 245, 252, 0.95);
+  border-top-color: rgba(255, 105, 180, 0.35);
+}
+
+/* keep send button bright */
+.page.pink .sendBtn {
+  background: rgba(255, 105, 180, 0.4);
+  border-color: rgba(255, 105, 180, 0.6);
+}
+
+.page.pink .sendBtn:hover {
+  background: rgba(255, 105, 180, 0.6);
+}
+
+/* =====================
+   PINK MODE – TIMELINE FINAL TWEAKS
+   ===================== */
+
+/* timeline card background (soft pink tint, not white) */
+.page.pink .timelineCard,
+.page.pink .timelineCardSvg {
+  background: rgba(255, 245, 252, 0.95);
+  border-color: rgba(255, 105, 180, 0.3);
+}
+
+/* Timeline header text */
+.page.pink .timelineTitle,
+.page.pink .timelineHeader,
+.page.pink h3.timelineTitle {
+  color: rgba(255, 105, 180, 0.95);
+}
+
+/* subtitle under Timeline */
+.page.pink .timelineStage {
+  color: rgba(255, 105, 180, 0.75);
+}
+
+/* =====================
+   PINK MODE – TIMELINE FINAL TWEAKS
+   ===================== */
+
+/* timeline card background (soft pink tint, not white) */
+.page.pink .timelineCard,
+.page.pink .timelineCardSvg {
+  background: rgba(255, 245, 252, 0.95);
+  border-color: rgba(255, 105, 180, 0.3);
+}
+
+/* Timeline header text */
+.page.pink .timelineTitle,
+.page.pink .timelineHeader,
+.page.pink h3.timelineTitle {
+  color: rgba(255, 105, 180, 0.95);
+}
+
+/* subtitle under Timeline */
+.page.pink .timelineStage {
+  color: rgba(255, 105, 180, 0.75);
+}
+
+/* =====================
+   PINK MODE – FORCE TIMELINE HEADER PINK (wins vs !important)
+   Put this at the VERY END of App.css
+   ===================== */
+
+   .page.pink .timelineCardSvg .timelineHeader .timelineTitle,
+   .page.pink .timelineCardSvg .timelineHeader .timelineStage{
+     color: rgba(255, 105, 180, 0.95) !important;
+     opacity: 1 !important;
+   }
+
+   /* =====================
+   PINK MODE – timeline event titles accent pink
+   (put at VERY END so it wins)
+   ===================== */
+.page.pink .timelineCardSvg .tlLabelTitle{
+  color: rgba(255, 105, 180, 0.95) !important;
+}
+
+/* =====================
+   PINK MODE – user bubble tail matches bubble
+   ===================== */
+   .page.pink .userBubble::after{
+    border-left-color: rgba(255, 105, 180, 0.25) !important;
+  }
+
+  /* =====================
+   PINK MODE – STAGE HEADER
+   ===================== */
+
+.page.pink .stageTitle{
+  color: rgba(255, 105, 180, 0.95) !important;
+}
+
+.page.pink .activeCasePill{
+  color: rgba(255, 105, 180, 0.75) !important;
+}
+
+/* =====================
+   PINK MODE – PROCEDURAL SIMULATOR TEXT
+   ===================== */
+
+/* Titles */
+.page.pink .simTitle,
+.page.pink .simNodeTitle{
+  color: rgba(255, 105, 180, 0.95) !important;
+}
+
+/* Body text */
+.page.pink .simNodeBody{
+  color: rgba(42, 15, 31, 0.78) !important;
+}
+
+/* Choice buttons text */
+.page.pink .simChoiceBtn{
+  color: rgba(255, 105, 180, 0.95) !important;
+}
+
+/* Secondary/back buttons */
+.page.pink .simChoiceBtn.secondary{
+  color: rgba(255, 105, 180, 0.85) !important;
+}
+
+/* =====================
+   PINK MODE – PROCEDURAL SIMULATOR TEXT
+   ===================== */
+
+/* Titles */
+.page.pink .simTitle,
+.page.pink .simNodeTitle{
+  color: rgba(255, 105, 180, 0.95) !important;
+}
+
+/* Body text */
+.page.pink .simNodeBody{
+  color: rgba(42, 15, 31, 0.78) !important;
+}
+
+/* Choice buttons text */
+.page.pink .simChoiceBtn{
+  color: rgba(255, 105, 180, 0.95) !important;
+}
+
+/* Secondary/back buttons */
+.page.pink .simChoiceBtn.secondary{
+  color: rgba(255, 105, 180, 0.85) !important;
+}
+
+/* =====================
+   PINK MODE – INPUT PLACEHOLDER
+   ===================== */
+
+   .page.pink .dockInput::placeholder{
+    color: rgba(255, 105, 180, 0.65) !important;
+  }
+
+  /* Typed text inside input */
+.page.pink .dockInput{
+  color: rgba(255, 105, 180, 0.95) !important;
+}
+
+/* =====================
+   PINK MODE – SEND ICON
+   ===================== */
+
+   .page.pink .sendIcon,
+   .page.pink .sendBtn svg{
+     stroke: rgba(255, 105, 180, 0.95) !important;
+     color: rgba(255, 105, 180, 0.95) !important;
+   }
+
+   /* =====================
+   PINK MODE – THEME TOGGLE (SUN / MOON)
+   ===================== */
+
+.page.pink .themeIcon{
+  color: rgba(255, 105, 180, 0.95) !important;
+}
+
+.page.pink .toggleTrack{
+  background: rgba(255, 105, 180, 0.35) !important;
+}
+
+.page.pink .toggleThumb{
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* ----------------------------- */
+/* Outcome Stats (Card)          */
+/* ----------------------------- */
+
+.statsCard{
+  margin-top: 12px;
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255,255,255,0.35);
+  border: 1px solid rgba(17,45,123,0.10);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.08);
+  color: var(--navy);
+}
+
+.page.dark .statsCard{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(230,236,255,0.10);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+}
+
+.statsHeader{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.statsTitle{
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.statsSub{
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.statsBody{
+  display:grid;
+  grid-template-columns: 132px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.statsPieWrap{
+  width: 132px;
+  height: 132px;
+  display:grid;
+  place-items:center;
+}
+
+.statsPie{
+  width: 132px;
+  height: 132px;
+  display:block;
+  color: currentColor; /* theme-driven */
+}
+
+.statsPieBase{
+  fill: currentColor;
+  opacity: 0.10;
+}
+
+.statsSlice{
+  fill: currentColor;
+}
+
+.statsPieHole{
+  fill: rgba(255,255,255,0.65);
+}
+
+.page.dark .statsPieHole{
+  fill: rgba(0,0,0,0.18);
+}
+
+.statsLegend{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.statsLegendRow{
+  display:grid;
+  grid-template-columns: 14px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.statsDot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: currentColor;
+  display:inline-block;
+  box-shadow: 0 0 0 2px rgba(17,45,123,0.08);
+}
+
+.page.dark .statsDot{
+  box-shadow: 0 0 0 2px rgba(230,236,255,0.10);
+}
+
+.statsLabel{
+  opacity: 0.92;
+  font-weight: 600;
+}
+
+.statsVal{
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  opacity: 0.92;
+}
+
+.statsSkipped{
+  font-size: 13px;
+  opacity: 0.82;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(17,45,123,0.10);
+}
+
+.page.dark .statsSkipped{
+  background: rgba(0,0,0,0.16);
+  border-color: rgba(230,236,255,0.12);
+}
+
+.statsFoot{
+  margin-top: 10px;
+  font-size: 12px;
+  opacity: 0.70;
+}
+
+/* =====================
+   PINK MODE – STATS CARD
+   ===================== */
+
+.page.pink .statsCard{
+  background: rgba(255, 245, 252, 0.95);
+  border-color: rgba(255, 105, 180, 0.30);
+  color: rgba(255, 105, 180, 0.95); /* makes pie + header accents pink */
+}
+
+/* Keep legend readable (pink accents, darker body text) */
+.page.pink .statsLabel,
+.page.pink .statsVal,
+.page.pink .statsSub,
+.page.pink .statsFoot{
+  color: #2a0f1f;
+  opacity: 0.85;
+}
+
+/* But keep the title itself accent pink */
+.page.pink .statsTitle{
+  color: rgba(255, 105, 180, 0.95);
+  opacity: 1;
+}
+
+/* Pie hole stays soft white, not navy */
+.page.pink .statsPieHole{
+  fill: rgba(255,255,255,0.90);
+}
+
+/* Skipped box in pink mode */
+.page.pink .statsSkipped{
+  background: rgba(255,255,255,0.90);
+  border-color: rgba(255, 105, 180, 0.25);
+  color: #2a0f1f;
+}
+
