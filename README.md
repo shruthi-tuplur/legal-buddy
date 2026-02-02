@@ -28,24 +28,24 @@
   <tr>
     <td align="center">
       <img src="screenshots/home_light.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
     <td align="center">
       <img src="screenshots/stats1.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
   </tr>
   <tr>
     <td align="center">
       <img src="screenshots/timeline1.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
     <td align="center">
       <img src="screenshots/procedural1.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
   </tr>
@@ -62,7 +62,7 @@
 
 <p align="center">
   <img src="screenshots/initial_response.png"
-       width="600"
+       width="420"
        style="object-fit: contain;" />
 </p>
 
@@ -79,12 +79,12 @@
   <tr>
     <td align="center">
       <img src="screenshots/stats1.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
     <td align="center">
       <img src="screenshots/stats2.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
   </tr>
@@ -103,17 +103,17 @@
   <tr>
     <td align="center">
       <img src="screenshots/procedural1.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
     <td align="center">
       <img src="screenshots/procedural2.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
     <td align="center">
       <img src="screenshots/procedural3.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
   </tr>
@@ -132,17 +132,17 @@
   <tr>
     <td align="center">
       <img src="screenshots/timeline1.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
     <td align="center">
       <img src="screenshots/timeline2.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
     <td align="center">
       <img src="screenshots/timeline3.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
   </tr>
@@ -156,24 +156,24 @@
   <tr>
     <td align="center">
       <img src="screenshots/home_dark.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
     <td align="center">
       <img src="screenshots/stats_dark.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
   </tr>
   <tr>
     <td align="center">
       <img src="screenshots/timeline_dark.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
     <td align="center">
       <img src="screenshots/procedural_simulator_dark.png"
-           width="280" height="560"
+           width="300" height="600"
            style="object-fit: contain;" />
     </td>
   </tr>
