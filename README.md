@@ -1,6 +1,6 @@
 ## Landing Experience
 
-![Landing page – light mode](screenshots/home_light)
+![Landing page – light mode]([screenshots/home_light](https://github.com/shruthi-tuplur/legal-buddy/blob/main/screenshots/home_light))
 
 ---
 
