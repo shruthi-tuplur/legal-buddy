@@ -1,51 +1,113 @@
-## Landing Experience
+<h1 align="center">Legal Buddy</h1>
 
-![Landing page – light mode]([screenshots/home_light](https://github.com/shruthi-tuplur/legal-buddy/blob/main/screenshots/home_light))
+<p align="center">
+  An LLM-powered web application that helps justice-involved individuals understand their court cases, what’s happening now, and what typically comes next — using grounded data, visual explanations, and interactive procedural guidance.
+</p>
 
----
+<hr />
 
-## Case Overview (After Case ID Lookup)
+<h2>Landing Experience</h2>
 
-After a user submits a case ID, Legal Buddy retrieves the relevant court data and explains the current status of the case in clear, human-friendly language.
+<p>
+  Legal Buddy begins with a simple, low-friction entry point that invites users to ask questions grounded in their own case.
+</p>
 
-![Initial case response](screenshots/initial_response)
+<p align="center">
+  <img src="screenshots/home_light.png" width="650" />
+</p>
 
----
+<hr />
 
-## Similar Case Outcomes
+<h2>Case Overview (After Case ID Lookup)</h2>
 
-When users ask how similar cases typically turn out, Legal Buddy computes outcome statistics and presents them visually alongside a plain-language explanation.
+<p>
+  After a user submits a case ID, Legal Buddy retrieves relevant public court records and translates fragmented legal information into a clear, human-friendly explanation of the case’s current status.
+</p>
 
-![Outcome statistics – part 1](screenshots/stats1.png)
-![Outcome statistics – part 2](screenshots/stats2.png)
+<p align="center">
+  <img src="screenshots/initial_response.png" width="600" />
+</p>
 
----
+<hr />
 
-## Procedural Simulator: “What Usually Happens Next?”
+<h2>Similar Case Outcomes</h2>
 
-Legal Buddy includes an interactive procedural simulator that lets users explore common next steps in their case and see how different procedural paths unfold.
+<p>
+  When users ask how similar cases typically turn out, Legal Buddy computes cohort-based outcome statistics and presents them visually alongside a plain-language explanation.
+</p>
 
-![Procedural simulator – introduction](screenshots/procedural1.png)
-![Procedural simulator – interaction](screenshots/procedural2.png)
-![Procedural simulator – continued](screenshots/procedural3.png)
+<p align="center">
+  <img src="screenshots/stats1.png" width="350" />
+  <img src="screenshots/stats2.png" width="350" />
+</p>
 
----
+<hr />
 
-## Case Timeline
+<h2>Procedural Simulator: “What Usually Happens Next?”</h2>
 
-Users can view a structured timeline showing completed events, the current stage of the case, and likely upcoming milestones.
+<p>
+  Legal Buddy includes an interactive procedural simulator that allows users to explore common next steps in their case and understand how different procedural paths typically unfold.
+</p>
 
-![Timeline – part 1](screenshots/timeline1.png)
-![Timeline – part 2](screenshots/timeline2.png)
-![Timeline – part 3](screenshots/timeline3.png)
+<p align="center">
+  <img src="screenshots/procedural1.png" width="300" />
+  <img src="screenshots/procedural2.png" width="300" />
+  <img src="screenshots/procedural3.png" width="300" />
+</p>
 
----
+<hr />
 
-## Dark Mode
+<h2>Case Timeline</h2>
 
-All core workflows support dark mode for accessibility and comfort.
+<p>
+  Users can view a structured timeline showing completed events, the current stage of the case, and likely upcoming milestones, derived deterministically from court records.
+</p>
 
-![Landing page – dark mode](screenshots/home_dark.png)
-![Outcome statistics – dark mode](screenshots/stats_dark.png)
-![Timeline – dark mode](screenshots/timeline_dark.png)
-![Procedural simulator – dark mode](screenshots/procedural_simulator_dark.png)
+<p align="center">
+  <img src="screenshots/timeline1.png" width="300" />
+  <img src="screenshots/timeline2.png" width="300" />
+  <img src="screenshots/timeline3.png" width="300" />
+</p>
+
+<hr />
+
+<h2>Dark Mode</h2>
+
+<p>
+  All core workflows support dark mode for accessibility and comfort.
+</p>
+
+<p align="center">
+  <img src="screenshots/home_dark.png" width="250" />
+  <img src="screenshots/stats_dark.png" width="250" />
+  <img src="screenshots/timeline_dark.png" width="250" />
+  <img src="screenshots/procedural_simulator_dark.png" width="250" />
+</p>
+
+<hr />
+
+<h2>Key Features</h2>
+
+<ul>
+  <li>Grounded retrieval of public court records</li>
+  <li>Human-friendly explanations of legal status and procedure</li>
+  <li>Visual outcome statistics for similar cases</li>
+  <li>Interactive procedural simulator</li>
+  <li>Deterministic case timeline generation</li>
+  <li>Light and dark mode support</li>
+</ul>
+
+<hr />
+
+<h2>Tech Stack</h2>
+
+<ul>
+  <li><strong>Frontend:</strong> React</li>
+  <li><strong>Backend:</strong> FastAPI</li>
+  <li><strong>LLMs:</strong> OpenAI / local models</li>
+  <li><strong>Data:</strong> Public court records</li>
+</ul>
+
+<p>
+  This project was designed with an emphasis on clarity, accessibility, and procedural justice.
+</p>
