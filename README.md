@@ -11,10 +11,19 @@
 <h2>Overview</h2>
 
 <p>
-  Legal Buddy reduces confusion around legal proceedings by translating fragmented court records
-  into clear explanations, visual summaries, and structured timelines. The system focuses on
-  procedural clarity and historical patterns rather than outcome prediction.
+  Legal Buddy helps justice-involved individuals make sense of their court cases in a way that feels
+  clear, humane, and supportive. By translating fragmented public court records into plain-language
+  explanations, visual summaries, and structured timelines, the system aims to reduce fear,
+  confusion, and shame around the legal process. Legal Buddy is designed to help users feel more
+  informed, less alone, and more empowered as they navigate unfamiliar procedures.
 </p>
+
+<p>
+  Legal Buddy does not provide legal advice and is not a substitute for an attorney. The information
+  presented is educational in nature and intended to help users better understand publicly available
+  court records and common procedural patterns.
+</p>
+
 
 <hr />
 
