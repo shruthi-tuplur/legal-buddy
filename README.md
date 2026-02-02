@@ -1,6 +1,6 @@
 ## Landing Experience
 
-![Landing page – light mode](screenshots/home_light.png)
+![Landing page – light mode](screenshots/home_light)
 
 ---
 
@@ -8,7 +8,7 @@
 
 After a user submits a case ID, Legal Buddy retrieves the relevant court data and explains the current status of the case in clear, human-friendly language.
 
-![Initial case response](screenshots/initial_response.png)
+![Initial case response](screenshots/initial_response)
 
 ---
 
