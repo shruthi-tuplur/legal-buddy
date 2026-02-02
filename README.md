@@ -55,11 +55,23 @@
 
 <h2>Case Overview (After Case ID Lookup)</h2>
 
-<p align="center">
-  <div style="width:420px;border-radius:24px;overflow:hidden;display:inline-block;">
-    <img src="screenshots/initial_response.png" width="420" style="object-fit:contain;" />
-  </div>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <div style="
+        width: 360px;
+        max-width: 100%;
+        overflow: hidden;
+        display: inline-block;
+      ">
+        <img src="screenshots/initial_response.png"
+             width="360"
+             style="object-fit: contain;" />
+      </div>
+    </td>
+  </tr>
+</table>
+
 
 <hr />
 
