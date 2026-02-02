@@ -26,27 +26,27 @@
 
 <table align="center">
   <tr>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/home_light.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/stats1.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
   </tr>
   <tr>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/timeline1.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/procedural1.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
   </tr>
 </table>
@@ -60,10 +60,10 @@
   the current procedural status in clear, human-friendly language.
 </p>
 
-<p align="center">
+<p align="center" style="border-radius: 24px; overflow: hidden;">
   <img src="screenshots/initial_response.png"
        width="420"
-       style="object-fit: contain; border-radius: 24px;" />
+       style="object-fit: contain;" />
 </p>
 
 <hr />
@@ -77,15 +77,15 @@
 
 <table align="center">
   <tr>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/stats1.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/stats2.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
   </tr>
 </table>
@@ -101,20 +101,20 @@
 
 <table align="center">
   <tr>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/procedural1.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/procedural2.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/procedural3.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
   </tr>
 </table>
@@ -130,20 +130,20 @@
 
 <table align="center">
   <tr>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/timeline1.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/timeline2.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/timeline3.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
   </tr>
 </table>
@@ -154,27 +154,27 @@
 
 <table align="center">
   <tr>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/home_dark.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/stats_dark.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
   </tr>
   <tr>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/timeline_dark.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
-    <td align="center">
+    <td align="center" style="border-radius: 24px; overflow: hidden;">
       <img src="screenshots/procedural_simulator_dark.png"
            width="300" height="600"
-           style="object-fit: contain; border-radius: 24px;" />
+           style="object-fit: contain;" />
     </td>
   </tr>
 </table>
