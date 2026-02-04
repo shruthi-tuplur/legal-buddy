@@ -368,11 +368,11 @@ def get_outcome_stats(
     rows = fetch_dispositions(q)
 
     stats = compute_comparison_stats_for_user_context(
-        all_disposition_rows=rows,
         user_stage_id=stage_id,
         user_offense_category=offense_category,
         user_charge_class=charge_class,
     )
+
     return stats
 
 

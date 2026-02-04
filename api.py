@@ -1,4 +1,9 @@
 from dotenv import load_dotenv
+import os
+
+load_dotenv()
+print("OPENAI_API_KEY loaded:", os.getenv("OPENAI_API_KEY"))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -13,7 +18,6 @@ from tools import build_timeline
 
 from simulator_tree_loader import get_sim_tree_v1, pick_root_for_stage  # ✅ new
 
-load_dotenv()
 
 app = FastAPI()
 print("LOADED api.py")
