@@ -29,7 +29,6 @@ class InMemorySessionStore:
     def _evict_if_needed(self):
         if len(self.sessions) <= self.max_sessions:
             return
-        # evict least recently updated
         oldest = sorted(self.sessions.values(), key=lambda s: s.updated_ts)[0]
         self.sessions.pop(oldest.session_id, None)
 
