@@ -202,3 +202,18 @@
 <p>
   Built with a focus on clarity, accessibility, and procedural justice.
 </p>
+
+## Testing
+
+Legal Buddy includes unit tests for core deterministic logic, including:
+- procedural stage inference
+- outcome statistics computation
+- session memory behavior
+
+External data sources (public court APIs) are mocked at the unit-test level to ensure tests are fast, deterministic, and reliable.
+
+Tests are written using `pytest` and can be run locally with:
+
+```bash
+pytest
+
