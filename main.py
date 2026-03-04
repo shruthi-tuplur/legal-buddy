@@ -19,6 +19,10 @@ INITIATION_URL = "https://datacatalog.cookcountyil.gov/resource/7mck-ehwz.json"
 DISPOSITION_URL = "https://datacatalog.cookcountyil.gov/resource/apwk-dzx8.json"
 SENTENCING_URL = "https://datacatalog.cookcountyil.gov/resource/tg8v-tm6u.json"
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+
+# DATA EXPLORATION UTILITIES - e.g. counting initiated cases, disposed cases, estimating open cases
+
 def count_open_cases():
     """Count how many cases are open."""
     print("\n" + "="*70)
@@ -74,7 +78,7 @@ def count_open_cases():
         "open_percentage": (open_cases/initiated_total*100)
     }
 
-def fetch_random_open_case():
+def fetch_random_open_case(): # random test case generator
     """Fetch a random OPEN case (one that has no disposition)."""
     print("Finding random OPEN cases...")
     
@@ -171,8 +175,8 @@ def print_case(case):
     print(f"  Result:               {case.get('felony_review_result', 'N/A')}")
     
     print(f"\n{'='*70}\n")
-
-def fetch_case_by_id(search_id):
+# --------------------------------------------------------------------------------------------------------------------------------------------
+def fetch_case_by_id(search_id): # core function
     """Fetch a case by ID, trying both case_id and case_participant_id."""
     print(f"\n{'='*70}")
     print(f"FETCHING CASE: {search_id}")
@@ -303,7 +307,10 @@ def fetch_latest_case():
 import json
 from datetime import datetime
 
-# Stage cards as structured objects (NOT printed directly by Python)
+# --------------------------------------------------------------------------------------------------------------------------------------------
+
+# Structured explanations for each legal stage
+# Used by LLM to generate user explanations
 STAGE_CARDS = {
     "PRE_ARRAIGNMENT": {
         "title": "Pre-Arraignment",
@@ -353,9 +360,7 @@ STAGE_CARDS = {
         "data_limits": "Public dataset shows case is open but does not include upcoming court dates, plea offers, or motion activity."
     },
     
-    # Updated STAGE_CARDS entry for POST_ARRAIGNMENT_PRETRIAL only
-    
-    # Updated STAGE_CARDS entry for POST_ARRAIGNMENT_PRETRIAL
+# Updated STAGE_CARDS entry for POST_ARRAIGNMENT_PRETRIAL
 "POST_ARRAIGNMENT_PRETRIAL": {
     "title": "Pretrial (post-arraignment)",
     "where_you_are": "Case is post-arraignment. This is the pretrial phase where cases typically move through discovery, scheduling, and case discussions and scheduling.",
@@ -452,6 +457,10 @@ def format_money(amount):
         return f"${float(amount):,.0f}"
     except:
         return amount
+# --------------------------------------------------------------------------------------------------------------------------------------------
+
+# Rule based stage inference algorithm
+# Determines procedural phase of case
 
 def infer_stage(case_data):
     """
@@ -514,7 +523,10 @@ def infer_stage(case_data):
     
     return ("PENDING_OR_UNKNOWN", "Unknown", "low", ["Insufficient data"])
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
 
+# Creates structured payload for LLM
+# includes case summary, stage inference, safety rules
 def build_llm_context_pack(case_data):
     """
     Build machine-readable payload for LLM consumption.
@@ -679,6 +691,9 @@ def build_llm_context_pack(case_data):
     
     return payload
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+
+# Prints factual case details before LLM explanation
 def print_case_analysis_for_user(case_data):
     """
     Print factual case analysis section only.
@@ -856,7 +871,10 @@ def print_case_analysis_for_user(case_data):
     print("\n" + "="*70 + "\n")
 
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
 
+# Interactive case lookup pipeline
+# connects dataset retrieval --> LLM explanation
 
 def cli_lookup_case():
     from llm_client_openai import call_llm_with_context_pack
@@ -893,7 +911,9 @@ def cli_lookup_case():
         print("RAW:", repr(llm_response))
         print("\n=== LLM RESPONSE ===\n", llm_response)
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
 
+# Main CLI interface for running the program
 
 # Main program
 if __name__ == "__main__":
