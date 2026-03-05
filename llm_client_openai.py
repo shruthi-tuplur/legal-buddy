@@ -1,4 +1,6 @@
-# llm_client_openai.py
+
+# Handles communication with OpenAI API and tool execution
+
 import os
 import json
 from typing import Dict, Any, Optional, List
@@ -6,19 +8,22 @@ from typing import Dict, Any, Optional, List
 from dotenv import load_dotenv
 from openai import OpenAI
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
 
+# Custom error class for LLM related failures
 class LLMError(Exception):
     pass
+# --------------------------------------------------------------------------------------------------------------------------------------------
 
+# Load env variables and sets model conf
 
-print("LOADED llm_client_openai.py")
-
-# Load env early in this module so any downstream imports have access.
-# (Still prefer lazy client initialization below to avoid import-time failures.)
 load_dotenv()
 
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+
+# Create OpenAI client at runtime to avoid env-loading issues
 
 def get_client() -> OpenAI:
     """
@@ -30,6 +35,9 @@ def get_client() -> OpenAI:
         raise LLMError("OPENAI_API_KEY is not set. Check your .env and load_dotenv() usage.")
     return OpenAI(api_key=api_key)
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+
+# Convert structured case context into readable text summary for LLM
 
 def pack_to_brief_text(context_pack: Dict[str, Any]) -> str:
     cs = context_pack.get("case_summary", {})
@@ -68,6 +76,9 @@ What has not happened yet: {join_list(card.get('what_not_yet', []))}
 Data limits: {card.get('data_limits', '')}
 """.strip()
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+
+# Defines tone, behavioral constraints, and safety rules for the LLM response
 
 SYSTEM_PROMPT = """
 You are looking at the user’s court record together with them.
