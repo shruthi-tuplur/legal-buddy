@@ -2,14 +2,16 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-print("OPENAI_API_KEY loaded:", os.getenv("OPENAI_API_KEY"))
+print("OPENAI_API_KEY loaded:", os.getenv("OPENAI_API_KEY")) # loads env var so OpenAI API key is available
 
+# importing FastAPI framework and typing utilities
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from typing import Optional, List, Any, Dict
 
+# internal project imports for use by API endpoints
 from main import fetch_case_by_id, build_llm_context_pack
 from llm_client_openai import call_llm_with_context_pack
 from memory_store import InMemorySessionStore
@@ -18,15 +20,20 @@ from tools import build_timeline
 
 from simulator_tree_loader import get_sim_tree_v1, pick_root_for_stage  # ✅ new
 
-
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# creates FastAPI app instance
 app = FastAPI()
 print("LOADED api.py")
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# health check endpoint - simple endpoint to verify API server is running
 
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# CORS middleware - allows frontend (React app) to call backend API
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,10 +43,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# request model for case explanation - request schema for case explanation endpoint
 
 class CaseRequest(BaseModel):
     case_id: str
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# /explain-case endpoint - basic endpoint that returns LLM explanation for a case
 
 @app.post("/explain-case")
 def explain_case(req: CaseRequest):
@@ -56,9 +67,13 @@ def explain_case(req: CaseRequest):
         "stage": context.get("stage"),
     }
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# session store - stores chat sessions and message history
 
 store = InMemorySessionStore()
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# intent detection functions - detects special user intents (timeline or procedural simulator)
 
 def is_timeline_intent(text: str) -> bool:
     t = (text or "").strip().lower()
@@ -101,6 +116,8 @@ def is_simulator_intent(text: str) -> bool:
     ]
     return any(p in t for p in triggers)
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# chat request/response schemas - powers the main chat endpoint
 
 class ChatRequest(BaseModel):
     session_id: Optional[str] = None
@@ -115,6 +132,8 @@ class ChatResponse(BaseModel):
     explanation: str
     ui_cards: List[Dict[str, Any]] = []
 
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# MAIN CHAT ENDPOINT
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
@@ -138,14 +157,15 @@ def chat(req: ChatRequest):
 
     context_pack = build_llm_context_pack(case_data)
 
-    # -------------------------
-    # Outcome stats (only when asked)
-    # -------------------------
+   
 
-        # Collect UI cards for this response (stats, simulator, timeline, etc.)
+    
     ui_cards_out: List[Dict[str, Any]] = []
 
     msg = (req.user_message or "").lower()
+
+    # --------------------------------------------------------------------------------------------------------------------------------------------
+    # stats logic - detects if a user asked about similar cases, outcomes, or statistics, then calls compute_
     wants_stats = bool(req.wantsStats) or any(
         k in msg
         for k in [
