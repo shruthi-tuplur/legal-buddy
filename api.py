@@ -165,7 +165,7 @@ def chat(req: ChatRequest):
     msg = (req.user_message or "").lower()
 
     # --------------------------------------------------------------------------------------------------------------------------------------------
-    # stats logic - detects if a user asked about similar cases, outcomes, or statistics, then calls compute_
+    # stats logic - adds outcome stats when user asks about similar cases
     wants_stats = bool(req.wantsStats) or any(
         k in msg
         for k in [
@@ -204,9 +204,7 @@ def chat(req: ChatRequest):
                 "reason": f"Stats hook failed: {type(e).__name__}",
             }
 
-        # -------------------------
-    # Stats card (only when asked)
-    # -------------------------
+
     if wants_stats:
         stats_payload = context_pack.get("comparison_stats") or {}
 
@@ -255,9 +253,9 @@ def chat(req: ChatRequest):
 
     stage_label = (context_pack.get("stage") or {}).get("stage_label") or ""
 
-    # -------------------------
-    # SIMULATOR INTENT
-    # -------------------------
+    # --------------------------------------------------------------------------------------------------------------------------------------------
+    # simulator intent branch - returns interactive procedural simulator based on case stage
+
     if is_simulator_intent(req.user_message):
         tree = get_sim_tree_v1()
         root_id = pick_root_for_stage(tree, stage_label)
@@ -284,9 +282,9 @@ def chat(req: ChatRequest):
             ui_cards=ui_cards_out,
         )
 
-    # -------------------------
-    # TIMELINE INTENT
-    # -------------------------
+    # --------------------------------------------------------------------------------------------------------------------------------------------
+    # timeline intent branch - builds timeline showing chronological case events when user intent detected
+
     if is_timeline_intent(req.user_message):
         try:
             timeline_payload = build_timeline(context_pack)
@@ -320,9 +318,9 @@ def chat(req: ChatRequest):
             ui_cards=ui_cards_out,
         )
 
-    # -------------------------
-    # NORMAL CHAT
-    # -------------------------
+    # --------------------------------------------------------------------------------------------------------------------------------------------
+    # normal chat flow - default chat flow that generates llm response
+    
     explanation = call_llm_with_context_pack(context_pack, history=history)
     store.append(session, "assistant", explanation)
 
